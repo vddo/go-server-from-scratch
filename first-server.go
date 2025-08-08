@@ -5,5 +5,9 @@ import (
 )
 
 func main() {
-	http.ListenAndServe(":8080", nil)
+	server := http.Server{
+		Addr:    ":8080",
+		Handler: nil,
+	}
+	server.ListenAndServe()
 }
