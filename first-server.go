@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
@@ -10,9 +11,14 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
 	http.HandleFunc("/", helloHandler)
 	server := http.Server{
-		Addr: ":8080",
+		Addr: ":" + port,
 	}
 	server.ListenAndServe()
 }
